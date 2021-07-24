@@ -41,20 +41,19 @@ click_thread.start()
 
 
 def on_press(key):
-    print("{0} pressed".format(key))
     if key in TOGGLE_COMBINATION:
         CURRENT.add(key)
         if all(keys in CURRENT for keys in TOGGLE_COMBINATION):
             if click_thread.running:
-                print("Auto clicker stopped")
+                print("[+] Auto clicker stopped")
                 click_thread.stop_clicking()
             else:
-                print("Auto clicker started")
+                print("[+] Auto clicker started")
                 click_thread.start_clicking()
     elif key in EXIT_COMBINATION:
         CURRENT.add(key)
         if all(keys in CURRENT for keys in EXIT_COMBINATION):
-            print("Auto clicker exiting...")
+            print("[+] Auto clicker exiting...")
             click_thread.exit()
             listener.stop()
 
@@ -68,3 +67,4 @@ def on_release(key):
 
 listener = Listener(on_press=on_press, on_release=on_release)
 listener.start()
+print("[+] Auto clicker is ready")
